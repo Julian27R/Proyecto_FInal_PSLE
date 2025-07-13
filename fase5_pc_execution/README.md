@@ -1,4 +1,7 @@
-# Fase 6: Publicación de Datos del Sensor MPU6050 desde Lichee RV Dock hacia ROS 2 mediante MQTT
+# Fase 5: Publicación de Datos del Sensor MPU6050 desde Lichee RV Dock hacia ROS 2 mediante MQTT
+
+<img width="1536" height="1024" alt="image" src="https://github.com/user-attachments/assets/2df76064-3f0d-467b-90f7-d5ec531302c4" />
+
 
 Esta fase del proyecto implementa la integración de un sensor I2C (MPU6050) conectado a la Lichee RV Dock, utilizando MQTT como protocolo intermedio para transmitir los datos hacia un PC. En el PC, los datos son recibidos y publicados como mensajes en un tópico de ROS 2, permitiendo su acceso por otros nodos del sistema. Esta etapa establece la base para una arquitectura distribuida de percepción sensorial en entornos robóticos.
 

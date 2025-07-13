@@ -5,6 +5,9 @@
 
 El **MPU6050** es un sensor inercial que integra un **acelerómetro triaxial** y un **giroscopio triaxial** en un solo chip.
 
+<img width="470" height="411" alt="image" src="https://github.com/user-attachments/assets/3c29f155-7355-4b8b-b1a0-80bf58265590" />
+
+
 ### 📌 Acelerómetro: mide aceleraciones lineales en tres ejes (en m/s²)
 
 - **Eje X (`accel['x']`)**: eje longitudinal horizontal del plano del sensor.

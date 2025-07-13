@@ -1,6 +1,32 @@
 # Fase 2: Habilitación del bus I2C2 (TWI2) en Lichee RV Dock para el sensor MPU6050
 
-Esta fase consiste en habilitar el bus I2C2 (TWI2) en la placa **Lichee RV Dock** para permitir la comunicación con el sensor **MPU6050**. Este bus no está activado por defecto en el Device Tree (árbol de dispositivos), por lo que se requiere modificarlo manualmente.
+Esta fase consiste en habilitar el bus I2C2 (TWI2) en la placa **Lichee RV Dock** para permitir la comunicación con el sensor **MPU6050**. Este bus no está activado por defecto en el Device Tree (árbol de dispositivos), por lo que se requiere modificarlo manualmente y recompilar el árbol de dispositivos.
+
+## ℹ️ Introducción
+
+La placa Lichee RV Dock incluye hasta 4 controladores I2C (TWI0, TWI1, TWI2 y TWI3), pero no todos están activos por defecto.
+
+Para conectar el sensor MPU6050 usando los pines:
+
+- 🟢 PB0 → SCL (reloj)  
+- 🟢 PB1 → SDA (datos)  
+
+se debe habilitar el controlador TWI2.
+
+| Controlador | Pines físicos          | Dirección base   |
+|-------------|------------------------|------------------|
+| TWI2        | 3.3V, PB0, PB1, GND    | 0x02502800 (hex) |
+
+📌 Referencias visuales:
+
+- Diagrama de pines (PB0/PB1 destacados):  
+
+  <img width="313" height="404" alt="image" src="https://github.com/user-attachments/assets/2b7e4969-3aa5-482f-a8fe-690b31d26102" />
+
+
+- Tabla de direcciones base de controladores I2C:  
+
+  <img width="692" height="190" alt="image" src="https://github.com/user-attachments/assets/f0cdd62d-5347-4390-9034-5302243f3fb5" />
 
 ---
 

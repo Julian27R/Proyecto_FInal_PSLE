@@ -1,0 +1,181 @@
+#include <linux/module.h>
+#define INCLUDE_VERMAGIC
+#include <linux/build-salt.h>
+#include <linux/elfnote-lto.h>
+#include <linux/export-internal.h>
+#include <linux/vermagic.h>
+#include <linux/compiler.h>
+
+#ifdef CONFIG_UNWINDER_ORC
+#include <asm/orc_header.h>
+ORC_HEADER;
+#endif
+
+BUILD_SALT;
+BUILD_LTO_INFO;
+
+MODULE_INFO(vermagic, VERMAGIC_STRING);
+MODULE_INFO(name, KBUILD_MODNAME);
+
+__visible struct module __this_module
+__section(".gnu.linkonce.this_module") = {
+	.name = KBUILD_MODNAME,
+	.arch = MODULE_ARCH_INIT,
+};
+
+#ifdef CONFIG_RETPOLINE
+MODULE_INFO(retpoline, "Y");
+#endif
+
+KSYMTAB_FUNC(inv_mpu_core_probe, "_gpl", "IIO_MPU6050");
+KSYMTAB_DATA(inv_mpu_pmops, "_gpl", "IIO_MPU6050");
+
+SYMBOL_CRC(inv_mpu_core_probe, 0xdc267b56, "_gpl");
+SYMBOL_CRC(inv_mpu_pmops, 0x98b58396, "_gpl");
+
+static const char ____versions[]
+__used __section("__versions") =
+	"\x1c\x00\x00\x00\x38\xf9\x28\xae"
+	"regulator_enable\0\0\0\0"
+	"\x20\x00\x00\x00\xb8\x68\x8a\xf2"
+	"device_property_present\0"
+	"\x24\x00\x00\x00\x81\xd4\xa2\x43"
+	"device_set_wakeup_capable\0\0\0"
+	"\x18\x00\x00\x00\xbb\x43\x66\x5d"
+	"regmap_write\0\0\0\0"
+	"\x24\x00\x00\x00\xc3\x3e\xa2\xbc"
+	"devm_request_threaded_irq\0\0\0"
+	"\x18\x00\x00\x00\x73\x52\x7b\x95"
+	"devm_kmalloc\0\0\0\0"
+	"\x18\x00\x00\x00\x3d\xdd\xbb\x28"
+	"iio_push_event\0\0"
+	"\x1c\x00\x00\x00\x32\x74\x14\x09"
+	"iio_buffer_enabled\0\0"
+	"\x20\x00\x00\x00\x6f\x36\xbe\x6e"
+	"ktime_get_mono_fast_ns\0\0"
+	"\x2c\x00\x00\x00\x2b\x8a\xd9\x02"
+	"devm_iio_triggered_buffer_setup_ext\0"
+	"\x1c\x00\x00\x00\x70\xfb\x58\x13"
+	"regmap_get_device\0\0\0"
+	"\x2c\x00\x00\x00\xfe\x4e\x29\xef"
+	"pm_runtime_set_autosuspend_delay\0\0\0\0"
+	"\x1c\x00\x00\x00\xa5\x7a\x15\xa3"
+	"iio_push_to_buffers\0"
+	"\x14\x00\x00\x00\x86\x81\x84\x96"
+	"scnprintf\0\0\0"
+	"\x28\x00\x00\x00\xa6\xdf\x52\x06"
+	"iio_device_release_direct_mode\0\0"
+	"\x24\x00\x00\x00\x91\x1c\x44\x4c"
+	"inv_sensors_timestamp_init\0\0"
+	"\x10\x00\x00\x00\x38\xdf\xac\x69"
+	"memcpy\0\0"
+	"\x14\x00\x00\x00\x87\x09\xec\xfc"
+	"enable_irq\0\0"
+	"\x1c\x00\x00\x00\x20\x5d\x05\xc3"
+	"usleep_range_state\0\0"
+	"\x18\x00\x00\x00\x60\xad\x3a\x0b"
+	"__module_get\0\0\0\0"
+	"\x14\x00\x00\x00\x23\x57\x5c\x22"
+	"get_device\0\0"
+	"\x18\x00\x00\x00\x7a\x2e\x00\xba"
+	"iio_device_id\0\0\0"
+	"\x1c\x00\x00\x00\x51\xb4\x39\xb7"
+	"__dynamic_dev_dbg\0\0\0"
+	"\x20\x00\x00\x00\xbd\x9e\x88\xbc"
+	"__pm_runtime_set_status\0"
+	"\x18\x00\x00\x00\x89\x38\xc3\x7a"
+	"devm_kstrdup\0\0\0\0"
+	"\x1c\x00\x00\x00\xcb\xf6\xfd\xf0"
+	"__stack_chk_fail\0\0\0\0"
+	"\x1c\x00\x00\x00\x41\x37\xe5\x80"
+	"pm_runtime_enable\0\0\0"
+	"\x1c\x00\x00\x00\xdb\xf9\xf1\x39"
+	"devm_regulator_get\0\0"
+	"\x20\x00\x00\x00\xeb\x40\xc4\x7b"
+	"iio_show_mount_matrix\0\0\0"
+	"\x28\x00\x00\x00\xf2\xad\x8d\x0f"
+	"iio_device_claim_direct_mode\0\0\0\0"
+	"\x14\x00\x00\x00\xc2\xa3\xf9\xeb"
+	"_dev_err\0\0\0\0"
+	"\x14\x00\x00\x00\xcb\x69\x85\x8c"
+	"kstrtoint\0\0\0"
+	"\x1c\x00\x00\x00\xcc\xd8\x66\x9f"
+	"irq_get_irq_data\0\0\0\0"
+	"\x20\x00\x00\x00\xea\x01\xa2\xd7"
+	"iio_trigger_poll_nested\0"
+	"\x14\x00\x00\x00\x2d\x80\x01\x44"
+	"mutex_lock\0\0"
+	"\x28\x00\x00\x00\xe4\x87\x7a\xd2"
+	"inv_sensors_timestamp_interrupt\0"
+	"\x28\x00\x00\x00\x5a\x04\x15\xf5"
+	"inv_sensors_timestamp_apply_odr\0"
+	"\x24\x00\x00\x00\x64\xd6\x44\xaf"
+	"__devm_iio_device_register\0\0"
+	"\x18\x00\x00\x00\x02\xa7\x5e\x2e"
+	"__mutex_init\0\0\0\0"
+	"\x20\x00\x00\x00\xd9\x3a\x5d\x67"
+	"iio_read_mount_matrix\0\0\0"
+	"\x20\x00\x00\x00\x4d\x21\xad\x38"
+	"devm_iio_device_alloc\0\0\0"
+	"\x14\x00\x00\x00\xc5\x77\xfe\xc2"
+	"_dev_warn\0\0\0"
+	"\x24\x00\x00\x00\xa1\xfc\xdd\xed"
+	"devm_iio_trigger_register\0\0\0"
+	"\x2c\x00\x00\x00\xe5\xef\x76\x8f"
+	"inv_sensors_timestamp_update_odr\0\0\0\0"
+	"\x1c\x00\x00\x00\xe7\x40\x28\xce"
+	"irq_set_irq_wake\0\0\0\0"
+	"\x18\x00\x00\x00\x7e\x07\xbd\x7e"
+	"iio_get_time_ns\0"
+	"\x1c\x00\x00\x00\x41\x1e\x01\x8c"
+	"regmap_noinc_read\0\0\0"
+	"\x18\x00\x00\x00\xa7\xc4\x4b\x1f"
+	"devm_kasprintf\0\0"
+	"\x14\x00\x00\x00\x46\x4f\x6e\x2f"
+	"regmap_read\0"
+	"\x1c\x00\x00\x00\xfa\x0b\x60\xae"
+	"regmap_bulk_write\0\0\0"
+	"\x1c\x00\x00\x00\x99\x56\x34\xac"
+	"__pm_runtime_resume\0"
+	"\x18\x00\x00\x00\xd4\x58\x84\xd4"
+	"mutex_unlock\0\0\0\0"
+	"\x1c\x00\x00\x00\x5f\x0c\xa7\x58"
+	"regmap_bulk_read\0\0\0\0"
+	"\x18\x00\x00\x00\x18\x01\x47\x56"
+	"__warn_printk\0\0\0"
+	"\x20\x00\x00\x00\x62\x4e\xa7\x0d"
+	"regmap_update_bits_base\0"
+	"\x1c\x00\x00\x00\x34\xc3\x59\x3e"
+	"regulator_disable\0\0\0"
+	"\x18\x00\x00\x00\x26\xf7\x6e\xdf"
+	"dev_err_probe\0\0\0"
+	"\x20\x00\x00\x00\x8d\xdf\x6f\xd4"
+	"iio_trigger_notify_done\0"
+	"\x20\x00\x00\x00\x2e\xb6\x22\xd9"
+	"__pm_runtime_suspend\0\0\0\0"
+	"\x1c\x00\x00\x00\xb5\xe9\x46\x82"
+	"__devm_add_action\0\0\0"
+	"\x1c\x00\x00\x00\x1f\xc7\x37\x61"
+	"iio_read_const_attr\0"
+	"\x20\x00\x00\x00\xeb\xbb\x76\xdf"
+	"iio_pollfunc_store_time\0"
+	"\x28\x00\x00\x00\x8b\xd2\xb6\x42"
+	"__pm_runtime_use_autosuspend\0\0\0\0"
+	"\x20\x00\x00\x00\xba\x77\xf6\xa2"
+	"__pm_runtime_disable\0\0\0\0"
+	"\x24\x00\x00\x00\x3f\xfb\x83\xc1"
+	"__devm_iio_trigger_alloc\0\0\0\0"
+	"\x1c\x00\x00\x00\x76\xd3\xa5\xd8"
+	"__pm_runtime_idle\0\0\0"
+	"\x10\x00\x00\x00\xf9\x82\xa4\xf9"
+	"msleep\0\0"
+	"\x14\x00\x00\x00\x6f\xca\xe4\x3c"
+	"disable_irq\0"
+	"\x18\x00\x00\x00\xc7\xdf\x30\xcd"
+	"module_layout\0\0\0"
+	"\x00\x00\x00\x00\x00\x00\x00\x00";
+
+MODULE_INFO(depends, "industrialio,industrialio-triggered-buffer,inv_sensors_timestamp");
+
+
+MODULE_INFO(srcversion, "CD17AEBE230E4F77EF89336");

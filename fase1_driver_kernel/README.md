@@ -59,17 +59,42 @@ int inv_sensors_timestamp_interrupt(
 
 - Modificación sugerida:
 
-  editar inv_mpu_ring.c
+Editar inv_mpu_ring.c
 
 ```bash
 nano inv_mpu_ring.c
 ```
 
-  Ubicar en inv_mpu_ring.c la línea correspondiente y reemplazar por:
+Ubicar en inv_mpu_ring.c la línea correspondiente y reemplazar por:
   
 ```c
 inv_sensors_timestamp_interrupt(ts, 0, 1, 1, pf->timestamp);
 ```
+
+🔧 inv_mpu_i2c.c
+
+- Modificar la llamada a la función i2c_mux_add_adapter para coincidir con la firma requerida por el kernel 6.8:
+
+```c
+int i2c_mux_add_adapter(struct i2c_mux_core *muxc, unsigned int chan_id,
+                        u32 class, u32 flags);
+```
+
+- Modificación sugerida:
+
+Editar inv_mpu_i2c.c
+
+```bash
+nano inv_mpu_i2c.c
+```
+
+Ubicar la línea correspondiente y reemplazar por
+
+```c
+i2c_mux_add_adapter(muxc, chan_id, 0, 0);
+```
+
+Estas modificaciones aseguran compatibilidad con el entorno de kernel actual de la Lichee RV Dock antes de proceder con la compilación.
 
 ### 2.4 Crear Makefile externo y compilar el módulo
 
@@ -96,25 +121,83 @@ make -f Makefile.external
 
 ---
 
-### 2.4 Cargar el módulo en el kernel
+### 2.5 Cargar el módulo en el kernel
 
-Se recomienda usar `modprobe` para que el sistema cargue automáticamente las dependencias del driver:
+Una vez que el módulo ha sido compilado correctamente, es necesario cargarlo junto con todos los módulos dependientes del subsistema IIO y del subsistema I2C multiplexado.
+
+A continuación se detalla el procedimiento completo paso a paso:
+
+1. Cargar subsistemas IIO requeridos por inv_mpu6050.ko
+
+El módulo principal inv_mpu6050.ko depende de los siguientes módulos del kernel:
+
+- industrialio
+- industrialio-triggered-buffer
+- inv_sensors_timestamp
+
+Cargarlos con:
 
 ```bash
 sudo modprobe industrialio
 sudo modprobe industrialio-triggered-buffer
 sudo modprobe inv_sensors_timestamp
+```
+Luego cargar el módulo principal del driver MPU6050:
+
+```bash
 sudo insmod inv_mpu6050.ko
-sudo insmod inv-mpu6050-i2c.ko
 ```
 
-Verificar que el driver está cargado:
+Verifica que se haya cargado correctamente:
 
 ```bash
 lsmod | grep inv_mpu
 ```
 
----
+2. Cargar módulos base de I2C-MUX
 
-✅ **Resultado esperado**:
-El módulo `inv_mpu6050` e `inv_mpu6050_i2c` se encuentran cargados correctamente y el sensor queda accesible mediante el sistema IIO.
+Antes de cargar el módulo I2C del driver (inv-mpu6050-i2c.ko), es necesario asegurarse de que estén cargados los siguientes módulos del kernel, ya que proporcionan símbolos que el driver necesita
+
+Símbolos requeridos:
+
+- i2c_mux_alloc
+- i2c_mux_add_adapter
+- i2c_mux_del_adapters
+
+Módulos que deben cargarse:
+
+```bash
+sudo modprobe i2c-mux
+sudo modprobe i2c-mux-pinctrl
+sudo modprobe i2c-mux-reg
+```
+
+Una vez cargadas las dependencias anteriores, se puede cargar el módulo inv-mpu6050-i2c.ko
+
+```bash
+sudo insmod inv-mpu6050-i2c.ko
+```
+
+Verifica que esté cargado:
+
+```bash
+lsmod | grep inv_mpu
+```
+
+Ejemplo de salida esperada:
+
+![Imagen de WhatsApp 2025-07-13 a las 19 08 45_ea93bef8](https://github.com/user-attachments/assets/e729d707-9d35-427e-a3ee-5c74f8ad740f)
+
+Resultado esperado:
+
+- Los módulos inv_mpu6050 y inv_mpu6050_i2c están correctamente cargados.
+- El sensor MPU6050 queda expuesto a través del subsistema IIO.
+  
+Puedes verificar que el dispositivo esté disponible con:
+
+```bash
+ls /sys/bus/iio/devices/
+```
+
+![Imagen de WhatsApp 2025-07-13 a las 19 10 29_f26ac876](https://github.com/user-attachments/assets/e0b3ecd0-4f88-4314-9057-0420daf90b89)
+

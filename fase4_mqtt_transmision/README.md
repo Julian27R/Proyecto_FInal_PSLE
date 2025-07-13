@@ -1,6 +1,11 @@
 
 # Fase 4: Lectura de datos del sensor en Lichee RV Dock
 
+Esta fase del proyecto se centra en la lectura de datos del sensor MPU6050 desde la Lichee RV Dock, utilizando el sistema de archivos `sysfs` en `/sys/bus/iio`. El objetivo es obtener valores de aceleración y velocidad angular de forma periódica, aplicando los factores de escala correctos, y prepararlos para su posterior transmisión.
+
+---
+
+
 ## Sensor utilizado: MPU6050
 
 El **MPU6050** es un sensor inercial que integra un **acelerómetro triaxial** y un **giroscopio triaxial** en un solo chip.
@@ -22,57 +27,80 @@ El **MPU6050** es un sensor inercial que integra un **acelerómetro triaxial** y
 
 ---
 
-## Pasos para la Lectura de Datos del MPU6050 desde la Lichee RV Dock
+## Script Python para Lectura del Sensor
 
-### 1. Requisitos Previos
-
-- Sensor MPU6050 habilitado en `/sys/bus/iio/devices/iio:device*`
-- Conexión I2C activa y funcionando
-- Python 3
-
----
-
-## 2. Script de Lectura Continua
+El siguiente script realiza la lectura del sensor desde la ruta `/sys/bus/iio/devices/iio:device0`, aplica los factores de escala y publica los valores en consola.
 
 ```python
 import os
 import time
+import paho.mqtt.client as mqtt
 
-# Ruta del dispositivo
+# === CONFIGURACIÓN ===
 device_path = "/sys/bus/iio/devices/iio:device0"
+broker_ip = "10.164.246.220"  # IP de tu PC
+topic = "sensor/mpu6050"
+interval = 1  # segundos
 
-# Leer valor de archivo
+# === FUNCIONES DE LECTURA ===
 def read_value(filename):
     with open(os.path.join(device_path, filename), 'r') as f:
         return float(f.read().strip())
 
-# Obtener escalas
+# === MQTT SETUP ===
+client = mqtt.Client()
+client.connect(broker_ip, 1883, keepalive=120)
+client.loop_start()
+
+# === ESCALA ===
 accel_scale = read_value("in_accel_scale")
-gyro_scale = read_value("in_anglvel_scale")
+gyro_scale  = read_value("in_anglvel_scale")
 
-# Intervalo de muestreo
-interval = 1  # segundos
-
-# Bucle principal
+# === BUCLE DE PUBLICACIÓN ===
 try:
     while True:
-        # Acelerómetro
         ax = read_value("in_accel_x_raw") * accel_scale
         ay = read_value("in_accel_y_raw") * accel_scale
         az = read_value("in_accel_z_raw") * accel_scale
 
-        # Giroscopio
         gx = read_value("in_anglvel_x_raw") * gyro_scale
         gy = read_value("in_anglvel_y_raw") * gyro_scale
         gz = read_value("in_anglvel_z_raw") * gyro_scale
 
-        # Mostrar por pantalla
-        print(f"Accel: x={ax:.2f}, y={ay:.2f}, z={az:.2f} | Gyro: x={gx:.2f}, y={gy:.2f}, z={gz:.2f}")
+        data = {
+            "accel": {"x": ax, "y": ay, "z": az},
+            "gyro" : {"x": gx, "y": gy, "z": gz}
+        }
+
+        message = f"{data}"
+        client.publish(topic, message)
+        print(f"Publicado: {message}")
+
         time.sleep(interval)
+
 except KeyboardInterrupt:
-    print("Lectura finalizada.")
+    client.loop_stop()
+    print("Finalizado")
 ```
 
 ---
 
-Este script permite leer en tiempo real los datos del sensor y verificar el correcto funcionamiento del MPU6050 integrado con el driver del kernel y el sistema `/sys/bus/iio`.
+## Requisitos
+
+- La Lichee RV Dock debe tener el sensor conectado y funcionando vía I2C.
+- Python 3 instalado.
+- Entorno virtual `mqtt_env` con `paho-mqtt` instalado.
+- El broker MQTT debe estar corriendo en el PC (por ejemplo, Mosquitto).
+
+---
+
+## Ejecución del Script
+
+```bash
+source mqtt_env/bin/activate
+python3 mpu6050_mqtt.py
+```
+
+---
+
+Este script garantiza la lectura precisa del sensor utilizando el sistema de archivos del kernel, escalando adecuadamente las mediciones crudas y transmitiendo los datos para su posterior integración con ROS2.

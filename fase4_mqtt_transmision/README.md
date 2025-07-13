@@ -22,75 +22,57 @@ El **MPU6050** es un sensor inercial que integra un **acelerómetro triaxial** y
 
 ---
 
-## Paso a paso: Lectura desde la interfaz sysfs o IIO (Industrial I/O)
+## Pasos para la Lectura de Datos del MPU6050 desde la Lichee RV Dock
 
-### 1. Verificar si el sensor fue detectado por el kernel
+### 1. Requisitos Previos
 
-```bash
-ls /sys/bus/iio/devices/
+- Sensor MPU6050 habilitado en `/sys/bus/iio/devices/iio:device*`
+- Conexión I2C activa y funcionando
+- Python 3
+
+---
+
+## 2. Script de Lectura Continua
+
+```python
+import os
+import time
+
+# Ruta del dispositivo
+device_path = "/sys/bus/iio/devices/iio:device0"
+
+# Leer valor de archivo
+def read_value(filename):
+    with open(os.path.join(device_path, filename), 'r') as f:
+        return float(f.read().strip())
+
+# Obtener escalas
+accel_scale = read_value("in_accel_scale")
+gyro_scale = read_value("in_anglvel_scale")
+
+# Intervalo de muestreo
+interval = 1  # segundos
+
+# Bucle principal
+try:
+    while True:
+        # Acelerómetro
+        ax = read_value("in_accel_x_raw") * accel_scale
+        ay = read_value("in_accel_y_raw") * accel_scale
+        az = read_value("in_accel_z_raw") * accel_scale
+
+        # Giroscopio
+        gx = read_value("in_anglvel_x_raw") * gyro_scale
+        gy = read_value("in_anglvel_y_raw") * gyro_scale
+        gz = read_value("in_anglvel_z_raw") * gyro_scale
+
+        # Mostrar por pantalla
+        print(f"Accel: x={ax:.2f}, y={ay:.2f}, z={az:.2f} | Gyro: x={gx:.2f}, y={gy:.2f}, z={gz:.2f}")
+        time.sleep(interval)
+except KeyboardInterrupt:
+    print("Lectura finalizada.")
 ```
 
-### 2. Navegar al dispositivo
+---
 
-```bash
-cd /sys/bus/iio/devices/iio:device0/
-ls
-```
-
-Verás archivos como:
-
-- `in_accel_{x,y,z}_raw`
-- `in_anglvel_{x,y,z}_raw`
-- `in_accel_scale`, `in_anglvel_scale`
-
-### 3. Leer valores crudos del sensor
-
-```bash
-cat in_accel_x_raw
-cat in_anglvel_x_raw
-```
-
-### 4. Convertir valores crudos a unidades reales
-
-Usar los factores de escala proporcionados por el kernel:
-
-```bash
-cat in_accel_scale      # → factor para convertir a m/s²
-cat in_anglvel_scale    # → factor para convertir a °/s
-```
-
-### 5. Script de monitoreo en tiempo real
-
-```bash
-#!/bin/bash
-
-cd /sys/bus/iio/devices/iio:device0 || exit
-
-accel_scale=$(cat in_accel_scale)
-gyro_scale=$(cat in_anglvel_scale)
-
-while true; do
-  ax=$(cat in_accel_x_raw)
-  ay=$(cat in_accel_y_raw)
-  az=$(cat in_accel_z_raw)
-
-  gx=$(cat in_anglvel_x_raw)
-  gy=$(cat in_anglvel_y_raw)
-  gz=$(cat in_anglvel_z_raw)
-
-  ax_val=$(echo "$ax * $accel_scale" | bc -l)
-  ay_val=$(echo "$ay * $accel_scale" | bc -l)
-  az_val=$(echo "$az * $accel_scale" | bc -l)
-
-  gx_val=$(echo "$gx * $gyro_scale" | bc -l)
-  gy_val=$(echo "$gy * $gyro_scale" | bc -l)
-  gz_val=$(echo "$gz * $gyro_scale" | bc -l)
-
-  echo "Accel [m/s²]  X:$ax_val  Y:$ay_val  Z:$az_val"
-  echo "Gyro  [°/s]   X:$gx_val  Y:$gy_val  Z:$gz_val"
-  echo ""
-  sleep 0.5
-done
-```
-
-Este script convierte en tiempo real los datos del sensor a unidades físicas comprensibles.
+Este script permite leer en tiempo real los datos del sensor y verificar el correcto funcionamiento del MPU6050 integrado con el driver del kernel y el sistema `/sys/bus/iio`.

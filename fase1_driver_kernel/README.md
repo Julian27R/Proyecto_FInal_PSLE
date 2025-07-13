@@ -199,5 +199,7 @@ Puedes verificar que el dispositivo esté disponible con:
 ls /sys/bus/iio/devices/
 ```
 
+Ejemplo de salida esperada
+
 ![Imagen de WhatsApp 2025-07-13 a las 19 10 29_f26ac876](https://github.com/user-attachments/assets/e0b3ecd0-4f88-4314-9057-0420daf90b89)
 

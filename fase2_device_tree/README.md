@@ -93,7 +93,7 @@ dmesg | grep -i i2c
 ls /dev/i2c-*
 ```
 
-Debe aparecer `/dev/i2c-2`.
+Debe aparecer `/dev/i2c-1`.
 
 #### c) Escanear el bus I2C2:
 

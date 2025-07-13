@@ -43,6 +43,12 @@ dtc -I dtb -O dts -o arbol.dts sun20i-d1-lichee-rv-dock.dtb
 
 ### 2. Editar `arbol.dts` para activar el bus I2C2 (TWI2) y registrar el MPU6050
 
+Se edita el archivo
+
+```bash
+nano arbol.dts
+```
+
 Se añadieron las siguientes secciones:
 
 #### a) Nodo para `i2c2@2502800`:

@@ -98,7 +98,7 @@ Debe aparecer `/dev/i2c-1`.
 #### c) Escanear el bus I2C2:
 
 ```bash
-sudo i2cdetect -y 2
+sudo i2cdetect -y 1
 ```
 
 Debe mostrar el sensor en la dirección `0x68` con el código `UU`, indicando que ya fue reclamado por el kernel.

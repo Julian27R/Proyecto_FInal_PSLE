@@ -1,0 +1,8 @@
+*/mqtt_env/
+# Binarios kernel / objetos
+*.o
+*.ko
+# Árbol de dispositivo compilado
+*.dtb
+# Archivos temporales
+*~

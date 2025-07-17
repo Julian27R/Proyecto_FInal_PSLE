@@ -1,4 +1,4 @@
-# Proyecto_Final_PSLE
+# Proyecto_Final_PSLE_Robotica
 
 # MPU6050-MQTT-ROS2 – Proyecto Lichee RV Dock
 

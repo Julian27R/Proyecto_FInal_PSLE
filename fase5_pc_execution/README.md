@@ -163,3 +163,12 @@ python3 mpu6050_mqtt.py
 
 Esto activará la lectura continua del sensor MPU6050, enviando datos por MQTT y publicándolos en tiempo real en el tópico /mpu6050/data en ROS 2.
 
+### Nodo suscriptor ROS 2
+
+En otra terminal del PC, se va a suscribir al tópico 'mpu6050/data' con el siguiente comando
+
+```bash
+ros2 topic echo /mpu6050/data
+```
+
+

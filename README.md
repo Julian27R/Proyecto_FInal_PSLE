@@ -129,7 +129,7 @@ source mqtt_env/bin/activate python3 mpu6050_mqtt.py
 
 | **Indicador**         | **Valor esperado**              | **Verificación**            |
 |------------------------|----------------------------------|-----------------------------|
-| Publicación MQTT       | Datos llegan a broker            | `mosquitto_sub`             |
+| Publicación MQTT       | Datos llegan a broker            | `python3 mpu6050_mqtt.py`  |
 | Publicación ROS 2      | Mensajes tipo `sensor_msgs/Imu` | `ros2 topic echo`           |
 
 ---

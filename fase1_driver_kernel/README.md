@@ -7,16 +7,21 @@ Esta fase describe cómo preparar el entorno de la Lichee RV Dock y compilar el 
 
 ---
 
-## 1. Preparación del entorno en Lichee Pi
+## 1. Imagen Cargada en la Lichee
+En el siguiente link se encuentra la página para descargar la imagen de Ubuntu 24.04.2 usada en la Lichee Rv Dock para este Proyecto.
+https://ubuntu.com/download/risc-v
+<img width="747" height="34" alt="image" src="https://github.com/user-attachments/assets/f2919085-56ec-4adc-8bc8-a8944225aa0d" />
 
-### 1.1 Instalar Linux con soporte para desarrollo
+## 2. Preparación del entorno en Lichee Pi
+
+### 2.1 Instalar Linux con soporte para desarrollo
 
 ```bash
 sudo apt update
 sudo apt install build-essential git cmake python3 python3-pip
 ```
 
-### 1.2 Instalar headers del kernel (necesarios para compilar drivers)
+### 2.2 Instalar headers del kernel (necesarios para compilar drivers)
 
 ```bash
 sudo apt install linux-headers-$(uname -r)
@@ -24,16 +29,16 @@ sudo apt install linux-headers-$(uname -r)
 
 ---
 
-## 2. Compilar y cargar el driver del MPU6050
+## 3. Compilar y cargar el driver del MPU6050
 
-### 2.1 Obtener el driver
+### 3.1 Obtener el driver
 
 ```bash
 git clone --depth=1 --branch rpi-6.12.y https://github.com/raspberrypi/linux.git
 cd linux
 ```
 
-### 2.2 Preparar el entorno de compilación
+### 3.2 Preparar el entorno de compilación
 
 ```bash
 sudo apt install build-essential bc libncurses-dev flex bison libssl-dev
@@ -41,7 +46,7 @@ sudo apt install make gcc
 ```
 
 ---
-### 2.3 Modificaciones necesarias para compatibilidad con Lichee RV Dock (kernel 6.8)
+### 3.3 Modificaciones necesarias para compatibilidad con Lichee RV Dock (kernel 6.8)
 
 Dado que el código fuente del driver está basado en el árbol del kernel 6.12 de Raspberry Pi, pero será compilado contra los headers del kernel 6.8 (utilizado en la Lichee RV Dock), es necesario adaptar dos archivos .c a las firmas de funciones esperadas por el sistema.
 
@@ -99,7 +104,7 @@ i2c_mux_add_adapter(muxc, chan_id, 0, 0);
 
 Estas modificaciones aseguran compatibilidad con el entorno de kernel actual de la Lichee RV Dock antes de proceder con la compilación.
 
-### 2.4 Crear Makefile externo y compilar el módulo
+### 3.4 Crear Makefile externo y compilar el módulo
 
 Dentro del directorio `inv_mpu6050/`, crear el archivo `Makefile.external`:
 
@@ -124,7 +129,7 @@ make -f Makefile.external
 
 ---
 
-### 2.5 Cargar el módulo en el kernel
+### 3.5 Cargar el módulo en el kernel
 
 Una vez que el módulo ha sido compilado correctamente, es necesario cargarlo junto con todos los módulos dependientes del subsistema IIO y del subsistema I2C multiplexado.
 

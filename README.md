@@ -112,7 +112,7 @@ Periodo 2025-1
 
 ---
 
-## ** 4. Diagrama de bloque**
+## **4. Diagrama de bloque**
 <img width="1497" height="372" alt="image" src="https://github.com/user-attachments/assets/0d366e73-ac4f-49bc-9ee2-34de72ac2c87" />
 
 ---

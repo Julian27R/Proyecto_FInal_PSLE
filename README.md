@@ -6,7 +6,7 @@
 
 ---
 
-## 🧱 1.1 Parte Estructural – RoboSenseLink
+## 🧱 2. Parte Estructural – RoboSenseLink
 
 ### 🔌 Hardware
 
@@ -88,12 +88,78 @@
 - **ROS 2 Distro recomendada**: Humble (soporte LTS)
 - **Herramientas complementarias**:
   - `ros2 run`,  `ros2 topic echo`
-  - 
-## ⚙️ 1.2 Parte Funcional – RoboSenseLink
+
+---
+
+## ⚙️ 3. Parte Funcional – RoboSenseLink
 
 ## **Diagrama de Flujo**
 <img width="522" height="1220" alt="Diagrama_Flujo_PF" src="https://github.com/user-attachments/assets/055177ba-2d91-47ba-9180-b45806c6280f" />
 
-## **Diagrama de bloque**
+---
+
+## ** 4. Diagrama de bloque**
 <img width="1497" height="372" alt="image" src="https://github.com/user-attachments/assets/0d366e73-ac4f-49bc-9ee2-34de72ac2c87" />
+
+---
+
+## **5. Pruebas del Sistema (Verificación y Validación)**
+
+Esta fase tiene como objetivo demostrar el correcto funcionamiento del sistema distribuido RoboSenseLink, desde la adquisición del sensor MPU6050 hasta la visualización en ROS 2.
+
+---
+
+#### 1. Publicación del sensor desde la Lichee (vía MQTT)
+
+- Verificar que la Lichee RV Dock publica datos del sensor en el tópico `sensor/mpu6050` usando MQTT.
+
+```bash
+mosquitto_sub -h localhost -t sensor/mpu6050
+```
+
+### 2. Transformación y publicación en ROS 2 desde la PC
+
+- Verificar que el nodo ROS 2 en la PC recibe los datos desde MQTT y los publica en /sensor/mpu6050.
+
+```bash
+ ros2 topic echo /sensor/mpu6050
+```
+
+## 📊 Indicadores de funcionamiento esperados
+
+| **Indicador**         | **Valor esperado**              | **Verificación**            |
+|------------------------|----------------------------------|-----------------------------|
+| Publicación MQTT       | Datos llegan a broker            | `mosquitto_sub`             |
+| Publicación ROS 2      | Mensajes tipo `sensor_msgs/Imu` | `ros2 topic echo`           |
+
+---
+
+## 🧪 Pruebas por módulo
+
+### Sensor MPU6050
+- Verificar lectura correcta por I2C en la Lichee.
+- Comprobar existencia de dispositivo:
+
+```bash
+i2cdetect -y 2
+```
+
+### Cliente MQTT en Lichee
+- Verificar que el script MQTT publica correctamente los datos con formato JSON.
+
+### Nodo ROS 2 publicador (cliente MQTT → ROS)
+- Verificar conversión correcta de mensaje JSON a sensor_msgs/Imu.
+
+---
+
+# 🔁 Prueba del sistema completo
+Simular movimiento del sensor MPU6050 y observar:
+
+1. Publicación MQTT desde Lichee.
+2. Reenvío y transformación por nodo ROS 2 en PC.
+
+
+  
+  
+
 

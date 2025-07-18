@@ -4,7 +4,7 @@
 **Universidad Nacional de Colombia – Sede Manizales**  
 Facultad de Ingeniería y Arquitectura  
 Asignaturas: **Programación en Sistemas Linux Embebidos** y **Robótica**  
-Manizales – 2025  
+Periodo 2025-1  
 
 ---
 

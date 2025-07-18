@@ -117,6 +117,9 @@ Esta fase tiene como objetivo demostrar el correcto funcionamiento del sistema d
 source mqtt_env/bin/activate python3 mpu6050_mqtt.py
 ```
 
+![Imagen de WhatsApp 2025-07-18 a las 19 53 01_27d3dae3](https://github.com/user-attachments/assets/d3b9794d-8e51-41dc-bae3-684a3adff780)
+
+
 ### 2. Transformación y publicación en ROS 2 desde la PC
 
 - Verificar que el nodo ROS 2 en la PC recibe los datos desde MQTT y los publica en /sensor/mpu6050.

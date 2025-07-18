@@ -150,6 +150,8 @@ source mqtt_env/bin/activate python3 mpu6050_mqtt.py
 i2cdetect -y 1
 ```
 
+![Imagen de WhatsApp 2025-07-18 a las 20 14 03_6827836f](https://github.com/user-attachments/assets/73064bc2-0971-4279-ba93-4b34445d00c7)
+
 
 ### Cliente MQTT en Lichee
 - Verificar que el script MQTT publica correctamente los datos con formato JSON.

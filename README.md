@@ -34,8 +34,7 @@
     - Convierte estos mensajes a formato ROS 2
     - Publica en el tópico `/sensor/mpu6050`
   - Ejecutar uno o varios **nodos suscriptores ROS 2** (por ejemplo, en otra terminal del mismo PC), que:
-    - Se **suscriben al tópico `/sensor/mpu6050`**
-    - 
+    - Se **suscriben al tópico `/mpu6050/data`** 
 ---
 
 ### 💻 Software
@@ -67,11 +66,11 @@
 - **Nombres típicos de nodos**:
   - `mqtt_to_ros_node`: actúa como **cliente MQTT** que recibe datos desde el tópico `sensor/mpu6050`
   - **Transforma** el contenido MQTT (JSON) en un mensaje `sensor_msgs/Imu`
-  - **Publica** el mensaje ROS 2 en el tópico `/sensor/mpu6050`
+  - **Publica** el mensaje ROS 2 en el tópico `/mpu6050/data`
 - **Tareas del nodo**:
   - Mapea datos de acelerómetro y giroscopio en los campos estándar de ROS 2
 - **Visualización y prueba**:
-  - `ros2 topic echo /sensor/mpu6050`
+  - `ros2 topic echo /mpu6050/data`
 
 ---
 

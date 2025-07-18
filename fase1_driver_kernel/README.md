@@ -1,5 +1,8 @@
 # Fase 1 – Preparación del entorno y compilación del driver MPU6050
 
+<img width="1024" height="1536" alt="image" src="https://github.com/user-attachments/assets/c85ee62a-5ff6-49a8-8f6b-ebb2b20d38cf" />
+
+
 Esta fase describe cómo preparar el entorno de la Lichee RV Dock y compilar el driver `inv_mpu6050` para habilitar la comunicación IIO con el sensor MPU6050.
 
 ---

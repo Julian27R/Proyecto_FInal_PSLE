@@ -94,6 +94,6 @@
 ## **Diagrama de Flujo**
 <img width="522" height="1220" alt="Diagrama_Flujo_PF" src="https://github.com/user-attachments/assets/055177ba-2d91-47ba-9180-b45806c6280f" />
 
-## **  Diagrama de bloque**
+## **Diagrama de bloque**
 <img width="1497" height="372" alt="image" src="https://github.com/user-attachments/assets/0d366e73-ac4f-49bc-9ee2-34de72ac2c87" />
 

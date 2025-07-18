@@ -8,7 +8,7 @@ Esta fase describe cómo preparar el entorno de la Lichee RV Dock y compilar el 
 ---
 
 ## 1. Imagen Cargada en la Lichee
-En el siguiente link se encuentra la página para descargar la imagen de Ubuntu 24.04.2 usada en la Lichee Rv Dock para este Proyecto.
+En el siguiente link se encuentra la página para Descargar la imagen de Ubuntu 24.04.2 para plataformas RISC-V usada en la Lichee Rv Dock para este Proyecto.
 https://ubuntu.com/download/risc-v
 <img width="747" height="34" alt="image" src="https://github.com/user-attachments/assets/f2919085-56ec-4adc-8bc8-a8944225aa0d" />
 

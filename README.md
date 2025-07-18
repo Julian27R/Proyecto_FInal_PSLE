@@ -122,8 +122,11 @@ source mqtt_env/bin/activate python3 mpu6050_mqtt.py
 - Verificar que el nodo ROS 2 en la PC recibe los datos desde MQTT y los publica en /sensor/mpu6050.
 
 ```bash
- ros2 topic echo /sensor/mpu6050
+ ros2 topic echo /mpu6050/data
 ```
+
+![Imagen de WhatsApp 2025-07-18 a las 19 55 40_bbb78b49](https://github.com/user-attachments/assets/8a252d51-1ac9-4525-9c38-476656f32c2b)
+
 
 ## 📊 Indicadores de funcionamiento esperados
 
@@ -144,11 +147,16 @@ source mqtt_env/bin/activate python3 mpu6050_mqtt.py
 i2cdetect -y 1
 ```
 
+
 ### Cliente MQTT en Lichee
 - Verificar que el script MQTT publica correctamente los datos con formato JSON.
+  ![Imagen de WhatsApp 2025-07-18 a las 19 53 01_fb1b0b67](https://github.com/user-attachments/assets/511ca197-7456-4582-88b7-c9575866cae1)
+
 
 ### Nodo ROS 2 publicador (cliente MQTT → ROS)
 - Verificar conversión correcta de mensaje JSON a sensor_msgs/Imu.
+  ![Imagen de WhatsApp 2025-07-18 a las 19 55 25_e7c5709d](https://github.com/user-attachments/assets/e30b208b-0b92-4851-8d04-e7f93ccaa9f8)
+
 
 ---
 

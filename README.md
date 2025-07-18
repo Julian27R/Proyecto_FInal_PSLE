@@ -76,7 +76,7 @@
 
 #### 📥 Nodo ROS 2 suscriptor (terminal separada)
 - **Lenguaje**: Python 
-- **Función**: Se **suscribe** al tópico `/sensor/mpu6050`
+- **Función**: Se **suscribe** al tópico `/mpu6050/data`
 - **Tareas posibles**:
   - Visualizar datos
 

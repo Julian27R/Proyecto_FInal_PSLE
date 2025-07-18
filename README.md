@@ -141,7 +141,7 @@ source mqtt_env/bin/activate python3 mpu6050_mqtt.py
 - Comprobar existencia de dispositivo:
 
 ```bash
-i2cdetect -y 2
+i2cdetect -y 1
 ```
 
 ### Cliente MQTT en Lichee

@@ -4,4 +4,6 @@
 ## **Descripción**
 RoboSenseLink es un sistema distribuido que utiliza sensores inerciales conectados por MQTT para enviar datos a un nodo maestro basado en ROS 2. El objetivo es monitorear, registrar y analizar el comportamiento de objetos en movimiento (por ejemplo, un robot móvil o brazo robótico) a través de una red confiable y modular.
 
+## **Diagrama de Flujo**
+<img width="522" height="1220" alt="Diagrama_Flujo_PF" src="https://github.com/user-attachments/assets/055177ba-2d91-47ba-9180-b45806c6280f" />
 

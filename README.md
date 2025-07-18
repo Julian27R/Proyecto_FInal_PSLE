@@ -114,7 +114,7 @@ Esta fase tiene como objetivo demostrar el correcto funcionamiento del sistema d
 - Verificar que la Lichee RV Dock publica datos del sensor en el tópico `sensor/mpu6050` usando MQTT.
 
 ```bash
-mosquitto_sub -h localhost -t sensor/mpu6050
+source mqtt_env/bin/activate python3 mpu6050_mqtt.py
 ```
 
 ### 2. Transformación y publicación en ROS 2 desde la PC

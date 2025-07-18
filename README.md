@@ -62,6 +62,33 @@
 
 ---
 
+#### 🤖 Nodo ROS 2 en la PC (cliente MQTT + publicador ROS 2)
+- **Lenguaje**: Python (`rclpy`)
+- **Nombres típicos de nodos**:
+  - `mqtt_to_ros_node`: actúa como **cliente MQTT** que recibe datos desde el tópico `sensor/mpu6050`
+  - **Transforma** el contenido MQTT (JSON) en un mensaje `sensor_msgs/Imu`
+  - **Publica** el mensaje ROS 2 en el tópico `/sensor/mpu6050`
+- **Tareas del nodo**:
+  - Mapea datos de acelerómetro y giroscopio en los campos estándar de ROS 2
+- **Visualización y prueba**:
+  - `ros2 topic echo /sensor/mpu6050`
+
+---
+
+#### 📥 Nodo ROS 2 suscriptor (terminal separada)
+- **Lenguaje**: Python 
+- **Función**: Se **suscribe** al tópico `/sensor/mpu6050`
+- **Tareas posibles**:
+  - Visualizar datos
+
+---
+
+#### 🐧 Sistema Operativo
+- **Distribución Linux**: Ubuntu 22.04 LTS (recomendado)
+- **ROS 2 Distro recomendada**: Humble (soporte LTS)
+- **Herramientas complementarias**:
+  - `ros2 run`,  `ros2 topic echo`
+  - 
 ## ⚙️ 1.2 Parte Funcional – RoboSenseLink
 
 ## **Diagrama de Flujo**

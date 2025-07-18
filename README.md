@@ -1,4 +1,17 @@
-# **RoboSenseLink: Sistema Distribuido de Sensado Inercial con MQTT y ROS 2**
+# 🤖 **RoboSenseLink: Sistema Distribuido de Sensado Inercial con MQTT y ROS 2**
+
+## 🏫 Proyecto Académico
+**Universidad Nacional de Colombia – Sede Manizales**  
+Facultad de Ingeniería y Arquitectura  
+Asignaturas: **Programación en Sistemas Linux Embebidos** y **Robótica**  
+Manizales – 2025  
+
+---
+
+## 👥 Autores
+- **Felipe Idárraga Quintero**  
+- **Julian Felipe Gutiérrez Ramírez**  
+
 <img width="859" height="335" alt="image" src="https://github.com/user-attachments/assets/8e6bc8b6-88b6-48cc-91b8-65b248896520" />
 
 ## 📘**1. Descripción**

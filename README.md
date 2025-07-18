@@ -32,7 +32,7 @@
     - Actúa como **cliente MQTT**, se conecta al broker local
     - Recibe los mensajes publicados por la Lichee (en JSON)
     - Convierte estos mensajes a formato ROS 2
-    - Publica en el tópico `/sensor/mpu6050`
+    - Publica en el tópico `/mpu6050/data`
   - Ejecutar uno o varios **nodos suscriptores ROS 2** (por ejemplo, en otra terminal del mismo PC), que:
     - Se **suscriben al tópico `/mpu6050/data`** 
 ---
